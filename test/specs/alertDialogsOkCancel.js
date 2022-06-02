@@ -1,5 +1,8 @@
 
 describe("Testes da funcionalidade App/Alert Dialogs/OK CANCEL DIALOG WITH MESSAGE", () => {
+    beforeEach( async () => {
+		await driver.reset();
+	});
     
     it("Botão de App está visível e com texto correto", async () => {
         //botão de App na tela inicial
