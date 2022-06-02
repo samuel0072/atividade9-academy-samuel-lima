@@ -149,4 +149,62 @@ describe("Testes da funcionalidade App/Action Bar/Display options", () => {
         
         expect(visibilidade).toBe(true);
     });
+
+    it("Verifica botão NAVIGATION", async () => {
+        //botão de App na tela inicial
+        const btnApp = await $("~App");
+        await btnApp.click();
+        
+        //botão de Action Bar 
+        const actionBar = await $("~Action Bar");
+        await actionBar.click();
+
+        //botão Display Options
+        const displayOptions = await $("~Display Options");
+        await displayOptions.click();
+       
+        //Botão Navigation
+        const btnNavigation= await $("~Navigation");
+        var text  =  await btnNavigation.getText();
+        var visibilidade = await btnNavigation.isDisplayed();
+        var habilitado = await btnNavigation.isEnabled();
+
+        expect(text).toBe("NAVIGATION");
+        expect(visibilidade).toBe(true);
+        expect(habilitado).toBe(true);
+
+        //aperta no botão e verifica se as abas aparecem
+        btnNavigation.click();
+        //aba 1
+        var seletor = 'new UiSelector().text("Tab 1").className("android.widget.TextView")';
+        var aba1 = $(`android=${seletor}`);
+        var text  =  await aba1.getText();
+        var visibilidade = await aba1.isDisplayed();
+        var habilitado = await aba1.isEnabled();
+
+        expect(text).toBe("Tab 1");
+        expect(visibilidade).toBe(true);
+        expect(habilitado).toBe(true);
+
+        //aba 2
+        var seletor = 'new UiSelector().text("Tab 2").className("android.widget.TextView")';
+        var aba2 = $(`android=${seletor}`);
+        var text  =  await aba2.getText();
+        var visibilidade = await aba2.isDisplayed();
+        var habilitado = await aba2.isEnabled();
+
+        expect(text).toBe("Tab 2");
+        expect(visibilidade).toBe(true);
+        expect(habilitado).toBe(true);
+        //aba 3
+        var seletor = 'new UiSelector().text("Tab 3").className("android.widget.TextView")';
+        var aba3 = $(`android=${seletor}`);
+        var text  =  await aba3.getText();
+        var visibilidade = await aba3.isDisplayed();
+        var habilitado = await aba3.isEnabled();
+
+        expect(text).toBe("Tab 3");
+        expect(visibilidade).toBe(true);
+        expect(habilitado).toBe(true);
+    });
 });
