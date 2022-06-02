@@ -84,4 +84,37 @@ describe("Testes da funcionalidade App/Action Bar/Display options", () => {
         expect(visibilidade).toBe(true);
         expect(habilitado).toBe(true);
     });
+
+    it("Verifica botão DISPLAY_SHOW_TITLE", async () => {
+        //botão de App na tela inicial
+        const btnApp = await $("~App");
+        await btnApp.click();
+        
+        //botão de Action Bar 
+        const actionBar = await $("~Action Bar");
+        await actionBar.click();
+
+        //botão Display Options
+        const displayOptions = await $("~Display Options");
+        await displayOptions.click();
+       
+        //Botão Display Home as Up
+        const btnShowTitle = await $("~DISPLAY_SHOW_TITLE");
+        var text  =  await btnShowTitle.getText();
+        var visibilidade = await btnShowTitle.isDisplayed();
+        var habilitado = await btnShowTitle.isEnabled();
+
+        expect(text).toBe("DISPLAY_SHOW_TITLE");
+        expect(visibilidade).toBe(true);
+        expect(habilitado).toBe(true);
+
+        //aperta no botão e verifica se o titulo desaparece
+        var seletor = 'new UiSelector().text("App/Action Bar/Display Options")';
+        var textoTopo = $(`android=${seletor}`);
+        btnShowTitle.click();
+        
+        var visibilidade = await textoTopo.isDisplayed();
+        
+        expect(visibilidade).toBe(false);
+    });
 });
