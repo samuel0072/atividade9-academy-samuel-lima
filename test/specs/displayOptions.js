@@ -98,7 +98,7 @@ describe("Testes da funcionalidade App/Action Bar/Display options", () => {
         const displayOptions = await $("~Display Options");
         await displayOptions.click();
        
-        //Botão Display Home as Up
+        //Botão Display Show title
         const btnShowTitle = await $("~DISPLAY_SHOW_TITLE");
         var text  =  await btnShowTitle.getText();
         var visibilidade = await btnShowTitle.isDisplayed();
@@ -116,5 +116,37 @@ describe("Testes da funcionalidade App/Action Bar/Display options", () => {
         var visibilidade = await textoTopo.isDisplayed();
         
         expect(visibilidade).toBe(false);
+    });
+
+    it("Verifica botão DISPLAY_SHOW_CUSTOM", async () => {
+        //botão de App na tela inicial
+        const btnApp = await $("~App");
+        await btnApp.click();
+        
+        //botão de Action Bar 
+        const actionBar = await $("~Action Bar");
+        await actionBar.click();
+
+        //botão Display Options
+        const displayOptions = await $("~Display Options");
+        await displayOptions.click();
+       
+        //Botão Display Show Custom
+        const btnShowCustom = await $("~DISPLAY_SHOW_CUSTOM");
+        var text  =  await btnShowCustom.getText();
+        var visibilidade = await btnShowCustom.isDisplayed();
+        var habilitado = await btnShowCustom.isEnabled();
+
+        expect(text).toBe("DISPLAY_SHOW_CUSTOM");
+        expect(visibilidade).toBe(true);
+        expect(habilitado).toBe(true);
+
+        //aperta no botão e verifica se o custom view aparece
+        btnShowCustom.click();
+        var customView = $('~Custom View!');
+        
+        var visibilidade = await customView.isDisplayed();
+        
+        expect(visibilidade).toBe(true);
     });
 });
